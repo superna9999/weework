@@ -8,15 +8,6 @@ class wee
 {
     function weeRun()
     {
-        /* Smarty */
-
-        $GLOBALS["smarty"] = new Smarty;
-
-        $GLOBALS["smarty"]->compile_check = true;
-        $GLOBALS["smarty"]->debugging = true;
-
-        $GLOBALS["smarty"]->assign("BASE_HREF", $_SERVER["SCRIPT_NAME"]);
-
         /* Session */
 
         session_start();
@@ -26,13 +17,14 @@ class wee
         if(!isset($_SESSION["global"]))
         {
             session_register("global");
-            $_SESSION["global"]->set = 1;
         }
 
-        $GLOBALS["BASE_HREF"] = $_SERVER["SCRIPT_NAME"];
+	if(!defined($_SERVER["SCRIPT_NAME"]))
+		$GLOBALS["BASE_HREF"] = "index.php";
+	else
+	        $GLOBALS["BASE_HREF"] = $_SERVER["SCRIPT_NAME"];
 
-        $global =& $_SESSION["global"];
-        $GLOBALS["global"] =& $global;
+        $GLOBALS["global"] =& $_SESSION["global"];
 
         /* Params */
         if(isset($_SERVER["PATH_INFO"]))
