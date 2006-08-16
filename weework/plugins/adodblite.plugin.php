@@ -12,7 +12,7 @@ require_once ADODBLITE_PATH . "adodb.inc.php";
 
 function adodblite_plugin_init()
 {
-	$GLOBALS["db"] = new ADONewConnection(DB_TYPE);
+	$GLOBALS["db"] = ADONewConnection(DB_TYPE);
 }
 
 ?>
