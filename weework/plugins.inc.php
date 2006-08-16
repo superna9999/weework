@@ -1,7 +1,9 @@
 <?php
 
-/* Plugins to load */
+/* Global Plugins to load */
 
 loadPlugin("dummy");
+loadPlugin("smarty");
+loadPlugin("adodblite");
 
 ?>
