@@ -17,6 +17,4 @@ require_once "includes.php";
 $wee = new wee();
 $wee->weeRun();
 
-//phpinfo();
-
 ?>

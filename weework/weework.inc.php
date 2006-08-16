@@ -1,7 +1,7 @@
 <?php
 
 if(!defined("WEEWORK_PATH"))
-    define("WEEWORK_PATH", "./");
+    define("WEEWORK_PATH", dirname(__FILE__));
 
 if(!defined("SMARTY_PATH"))
     define("SMARTY_PATH", WEEWORK_PATH . "smarty/");
