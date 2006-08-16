@@ -2,6 +2,8 @@
 
 class wee
 {
+    function weeRun()
+    {
         /* Params */
         if(isset($_SERVER["PATH_INFO"]))
         {
