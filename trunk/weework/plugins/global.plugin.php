@@ -41,9 +41,14 @@ function global_plugin_init()
 			$GLOBALS["BASE_HREF"] = substr_replace($_SERVER["PHP_SELF"], "", strlen($GLOBALS['PATH_INFO']) * -1);
 		}
 		// fastCgi
-		else if(isset($_SERVER["REDIRECT_URL"]) && !empty($_SERVER["REDIRECT_URL"]))
+		else if(isset($_ENV["REDIRECT_URL"]) && !empty($_ENV["REDIRECT_URL"]))
 		{
-			$GLOBALS["BASE_HREF"] = substr_replace($_SERVER["REDIRECT_URL"], "", strlen($GLOBALS['PATH_INFO']) * -1);
+			$GLOBALS["BASE_HREF"] = substr_replace($_ENV["REDIRECT_URL"], "", strlen($GLOBALS['PATH_INFO']) * -1);
+		}
+		else if(isset($_ENV["REQUEST_URI"]) && 
+			!empty($_ENV["REQUEST_URI"]))
+		{
+			$GLOBALS["BASE_HREF"] = substr_replace($_ENV["REQUEST_URI"], "", strlen($GLOBALS['PATH_INFO']) * -1);
 		}
 	}
 	else
