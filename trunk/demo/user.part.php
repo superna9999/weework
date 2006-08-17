@@ -41,5 +41,4 @@ class part_user extends part
     }
 }
 
-?>
 

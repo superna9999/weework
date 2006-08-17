@@ -7,4 +7,4 @@ function dummy_plugin_init()
     // Should do something
 }
 
-?>
+
