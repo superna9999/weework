@@ -11,6 +11,12 @@ define("DB_TYPE", "mysql");
 //define("DB_TYPE", "postgres");
 //define("DB_TYPE", "sqlite");
 
+/* Database Settings */
+define("DB_USER", "superna");
+define("DB_PASS", "superna");
+define("DB_DATABASE", "demo");
+define("DB_HOST", "localhost");
+
 require_once WEEWORK_PATH . "weework.inc.php";
 require_once "includes.php";
 

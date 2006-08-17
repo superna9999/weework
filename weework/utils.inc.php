@@ -11,7 +11,7 @@
     }
 
     function userRedirect($path, $base = true)
-    {
+    {   
         if($base)
         {
             $loc = $GLOBALS["BASE_HREF"].$path;
