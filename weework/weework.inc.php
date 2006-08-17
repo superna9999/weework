@@ -36,4 +36,3 @@ define("PLUGIN_INIT", "_plugin_init");
 
 require WEEWORK_PATH . 'includes.inc.php';
 
-?>

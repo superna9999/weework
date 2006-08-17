@@ -52,4 +52,4 @@ function global_plugin_init()
     $GLOBALS["global"] =& $_SESSION["global"];
 }
 
-?>
+

@@ -36,4 +36,4 @@ function smarty_plugin_init()
 	$GLOBALS["smarty"]->assign("BASE_HREF", $GLOBALS["BASE_HREF"]);
 }
 
-?>
+

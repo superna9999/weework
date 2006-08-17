@@ -1,0 +1,19 @@
+
+   WeeWork - Tiny PHP Framework
+
+==================================
+ Released under the GPLv2 Licence
+==================================
+
+Summary
+=======
+I.   Informations
+II.  Installation
+III. Mini HOWTO
+
+
+I. INFORMATIONS
+===============
+
+
+

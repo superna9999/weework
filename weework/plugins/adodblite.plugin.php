@@ -111,4 +111,4 @@ function db_fetch_one_cell($sql)
         return NULL;
 }
 
-?>
+

@@ -50,5 +50,4 @@ class part_index extends part
     }
 }
 
-?>
 

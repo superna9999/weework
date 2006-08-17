@@ -52,5 +52,4 @@ class part_info extends part
     }
 }
 
-?>
 

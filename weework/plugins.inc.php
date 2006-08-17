@@ -26,4 +26,4 @@ loadPlugin("global");
 loadPlugin("smarty");
 loadPlugin("adodblite");
 
-?>
+

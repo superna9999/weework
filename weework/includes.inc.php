@@ -29,4 +29,4 @@ require_once WEEWORK_PATH . "init.inc.php";
 /* Common Plugins */
 require_once WEEWORK_PATH . "plugins.inc.php";
 
-?>
+
