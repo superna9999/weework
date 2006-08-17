@@ -30,7 +30,7 @@ function global_plugin_init()
 	else
 		$GLOBALS["BASE_HREF"] = $_SERVER["SCRIPT_NAME"];
 
-	$GLOBALS["global"] =& $_SESSION["global"];
+    $GLOBALS["global"] =& $_SESSION["global"];
 }
 
 ?>
