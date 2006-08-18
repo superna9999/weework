@@ -40,6 +40,14 @@ class part
 
         if(isset($path["page"]))
         {
+            if(isset($path["method"]) && $path["method"] === "POST")
+            {
+                $pagename = POST_PREFIX . $path["page"];
+
+                if(method_exists($this, $pagename))
+                    return $this->$pagename($args);
+            }
+
             $pagename = PAGE_PREFIX . $path["page"];
 
             if(method_exists($this, $pagename))
