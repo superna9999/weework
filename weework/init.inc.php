@@ -61,6 +61,12 @@ class wee
         else
             $args["part"] = "index";
 
+        /* Request Method */
+        $method = $_SERVER["REQUEST_METHOD"];
+        if(!$method === "GET" && !$method === "POST")
+            $method = "GET";
+        $args["method"] = $method;
+
         /* Find Part */
         $classname = PART_PREFIX . $args["part"];
 

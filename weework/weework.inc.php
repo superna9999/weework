@@ -30,6 +30,7 @@ define("PLUGINS_PATH", WEEWORK_PATH . "plugins");
 /* Wee Defines */
 
 define("PAGE_PREFIX", "page");
+define("POST_PREFIX", "post");
 define("PART_PREFIX", "part_");
 define("PLUGIN_NAME", ".plugin.php");
 define("PLUGIN_INIT", "_plugin_init");
