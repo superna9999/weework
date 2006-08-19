@@ -24,6 +24,9 @@
 if(!defined("SMARTY_PATH"))
 	define("SMARTY_PATH", WEEWORK_PATH . "smarty/");
 
+if(!defined("SMARTY_DEBUG"))
+	define("SMARTY_PATH", false);
+
 require_once SMARTY_PATH . "Smarty.class.php";
 
 function smarty_plugin_init()
@@ -31,7 +34,7 @@ function smarty_plugin_init()
 	$GLOBALS["smarty"] = new Smarty;
 
         $GLOBALS["smarty"]->compile_check = true;
-        $GLOBALS["smarty"]->debugging = true;
+        $GLOBALS["smarty"]->debugging = SMARTY_DEBUG;
 
 	$GLOBALS["smarty"]->assign("BASE_HREF", $GLOBALS["BASE_HREF"]);
 }
