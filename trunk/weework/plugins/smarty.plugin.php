@@ -54,7 +54,7 @@ function smarty_plugin_init()
 
     $GLOBALS["smarty"]->assign("BASE_HREF", $GLOBALS["BASE_HREF"]);
     $GLOBALS["smarty"]->assign("REQUEST_URL", $GLOBALS["REQUEST_URL"]);
-
+    $GLOBALS["smarty"]->assign("SSL", $GLOBALS["SSL"]);
 }
 
 
