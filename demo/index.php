@@ -25,6 +25,8 @@ define("SMARTY_PATH", LIB_PATH . "smarty/");
 define("ADODBLITE_PATH", LIB_PATH . "adodb_lite/");
 define("WEEWORK_PATH", LIB_PATH . "weework/");
 
+define("WEEWORK_DEBUG", true);
+
 /* AdoDB Lite - mysql */
 define("DB_TYPE", "mysql");
 //define("DB_TYPE", "postgres");
