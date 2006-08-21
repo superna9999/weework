@@ -55,6 +55,17 @@ function global_plugin_init()
 		$GLOBALS["BASE_HREF"] = $_SERVER["SCRIPT_NAME"];
 
     $GLOBALS["global"] =& $_SESSION["global"];
+
+    $GLOBALS["REQUEST_URL"] = "http";
+    if ( (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on') || $_SERVER['REMOTE_PORT'] == 443)
+    {    
+        $GLOBALS["SSL"] = true;
+        $GLOBALS["REQUEST_URL"] .= "s";
+    }
+    else
+        $GLOBALS["SSL"] = false;
+    $GLOBALS["REQUEST_URL"] .= "://" . $_SERVER["HTTP_HOST"] . $_SERVER["SCRIPT_NAME"];
+
 }
 
 
