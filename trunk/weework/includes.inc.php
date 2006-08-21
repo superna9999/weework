@@ -29,4 +29,7 @@ require_once WEEWORK_PATH . "init.inc.php";
 /* Common Plugins */
 require_once WEEWORK_PATH . "plugins.inc.php";
 
+/* Common Classes */
+require_once CLASSES_PATH . "captcha.class.php";
+
 

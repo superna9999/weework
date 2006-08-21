@@ -26,6 +26,7 @@ if(!defined("SMARTY_PATH"))
     define("SMARTY_PATH", WEEWORK_PATH . "smarty/");
 
 define("PLUGINS_PATH", WEEWORK_PATH . "plugins");
+define("CLASSES_PATH", WEEWORK_PATH . "classes/");
 
 /* Wee Defines */
 
