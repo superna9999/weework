@@ -25,5 +25,6 @@ loadPlugin("dummy");
 loadPlugin("global");
 loadPlugin("smarty");
 loadPlugin("adodblite");
-
+if(WEEWORK_DEBUG)
+    loadPlugin("debug");
 

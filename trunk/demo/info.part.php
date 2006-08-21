@@ -33,7 +33,7 @@ class part_info extends part
 
     function pageTest($arg)
     {
-        echo $GLOBALS["BASE_HREF"];
+        echo $GLOBALS["BASE_HREEF"];
     }
 
     function pageSql($arg)
