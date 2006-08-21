@@ -24,6 +24,10 @@
 //loadPlugin("myplugin", "plugins/");
 //loadPlugin("weeplugin");
 
+/* Weework Classes */
+
+//require_once CLASSES_PATH . "theclass.class.php";
+
 /* Local Includes */
 
 require_once "index.part.php";
