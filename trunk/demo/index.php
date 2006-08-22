@@ -24,6 +24,7 @@ define("LIB_PATH", "../");
 define("SMARTY_PATH", LIB_PATH . "smarty/");
 define("ADODBLITE_PATH", LIB_PATH . "adodb_lite/");
 define("WEEWORK_PATH", LIB_PATH . "weework/");
+define("WIKI_PATH", LIB_PATH . "wikirenderer/");
 
 define("WEEWORK_DEBUG", true);
 
