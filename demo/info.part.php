@@ -50,6 +50,11 @@ class part_info extends part
         print_r($e);
         echo "</pre>";
     }
+
+    function pageWiki($arg)
+    {
+        echo wiki_parse("*test\n");
+    }
 }
 
 

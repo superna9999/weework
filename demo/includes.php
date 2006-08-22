@@ -22,7 +22,7 @@
 /* Plugins */
 
 //loadPlugin("myplugin", "plugins/");
-//loadPlugin("weeplugin");
+loadPlugin("wikirenderer");
 
 /* Weework Classes */
 

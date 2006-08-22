@@ -16,39 +16,44 @@
     along with WeeWork; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-    $Id$
+    $Id:$
  */
 
-class part_index extends part
-{ 
-    function initPart($arg)
-    {
-        global $global;
-        unset($global->login);
-    }
+/* wiki parsing plugin */
 
-    function pageDefault($arg)
-    {
-        global $smarty;
-        if(file_exists("text/login.txt"))
-            $smarty->assign("text", wiki_parse(file_get_contents("text/login.txt")));
-        $smarty->display("login.tpl");
-    }
+if(!defined("WIKI_PATH"))
+	define("WIKI_PATH", WEEWORK_PATH . "wikirenderer/");
 
-    function pageLogin($arg)
-    {
-        global $smarty;
-        global $global;
-        
-        $p = $_POST;
-        if(isset($p["user"]) && $p["user"]==="admin")
-        {
-            $global->login = true;
-            userRedirect("/user");
-        }
-        else
-           $smarty->display("error.tpl");
-    }
+if(!defined("WIKI_DEBUG"))
+	define("WIKI_DEBUG", true);
+
+require_once WIKI_PATH . 'WikiRenderer.lib.php';
+
+$Entity = array(); 
+$FlgChr = chr(255);
+
+function wikirenderer_plugin_init()
+{
+    // Nothing to Do
 }
 
+function wiki_parse($text)
+{
+    $output = "";
 
+    $ctr = new WikiRenderer();
+    $output = $ctr->render($text);
+
+    if($ctr->errors && WIKI_DEBUG)
+    {
+        echo '<p style="color:red;">Warning: ';
+        if(count($ctr->errors)>1)
+            echo 'errors at lines : ',implode(',',array_keys($ctr->errors)),'</p>' ;
+        else
+        {
+            list($num,$l)=each($ctr->errors);
+            echo 'error at line ', $num,'</p>';
+        }
+    }
+    return $output;
+}
