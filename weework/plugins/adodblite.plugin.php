@@ -39,6 +39,7 @@ if(!defined("DB_HOST"))
     define("DB_HOST", "localhost");
 
 require_once ADODBLITE_PATH . "adodb.inc.php";
+require_once ADODBLITE_PATH . "adodb-errorhandler.inc.php";
 
 function adodblite_plugin_init()
 {
@@ -52,7 +53,7 @@ function db_connect($host=DB_HOST, $user=DB_USER, $pass=DB_PASS, $database=DB_DA
 {
     global $db;
     
-    $db->PConnect($host, $user, $pass, $database) or die("Unable to Connect to database");
+    return $db->PConnect($host, $user, $pass, $database);
 }
 
 function db_disconnect()
