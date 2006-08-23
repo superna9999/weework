@@ -16,17 +16,10 @@
     along with WeeWork; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-    $Id$
+    $Id:$
  */
 
-/* Coomon Classes */
-require_once WEEWORK_PATH . "classes.inc.php";
+/* Common Classes to load */
 
-/* Common Functions */
-require_once WEEWORK_PATH . "utils.inc.php";
-require_once WEEWORK_PATH . "init.inc.php";
-
-/* Common Plugins */
-require_once WEEWORK_PATH . "plugins.inc.php";
-
+require_once CLASSES_PATH . "part.class.php";
 

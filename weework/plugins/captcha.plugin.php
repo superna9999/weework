@@ -16,17 +16,16 @@
     along with WeeWork; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-    $Id$
+    $Id:$
  */
 
-/* Coomon Classes */
-require_once WEEWORK_PATH . "classes.inc.php";
+/* Captcha Plugin */
 
-/* Common Functions */
-require_once WEEWORK_PATH . "utils.inc.php";
-require_once WEEWORK_PATH . "init.inc.php";
+require_once CLASSES_PATH . "captcha.class.php";
 
-/* Common Plugins */
-require_once WEEWORK_PATH . "plugins.inc.php";
+function captcha_plugin_init()
+{
+    // Nothing To Do
+}
 
 
