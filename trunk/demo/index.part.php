@@ -30,6 +30,7 @@ class part_index extends part
     function pageDefault($arg)
     {
         global $smarty;
+        global $global;
         if(file_exists("text/login.txt"))
             $smarty->assign("text", wiki_parse(file_get_contents("text/login.txt")));
         $c = new Captcha(4);
