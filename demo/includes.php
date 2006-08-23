@@ -23,6 +23,7 @@
 
 //loadPlugin("myplugin", "plugins/");
 loadPlugin("wikirenderer");
+loadPlugin("captcha");
 
 /* Weework Classes */
 

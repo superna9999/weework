@@ -88,8 +88,8 @@ class Captcha
         $colorB2 = (rand(100,230)+$colorB)/2;
 
         $this->colorBg = imageColorAllocate($this->img, $colorR, $colorG, $colorB);
-        $this->colorTxt[0] = imageColorAllocate($this->img, ($colorR - 40), ($colorG2 - 40), ($colorB - 40));
-        $this->colorTxt[1] = imageColorAllocate($this->img, ($colorR - 40), ($colorG - 40), ($colorB2 - 40));
+        $this->colorTxt[0] = imageColorAllocate($this->img, ($colorR - 80), ($colorG2 - 70), ($colorB - 80));
+        $this->colorTxt[1] = imageColorAllocate($this->img, ($colorR - 70), ($colorG - 80), ($colorB2 - 70));
         $this->colorLine = imageColorAllocate($this->img, ($colorR - 10), ($colorG2 - 20), ($colorB2 - 10));
     }
 
@@ -98,7 +98,6 @@ class Captcha
         $range = (200/($this->strLength+1));
         for($i=0 ; $i < $this->strLength ; $i++)
         {
-            $font = "public/fonts/".rand(1,5).".ttf";
             $clockorcounter = rand(1,2);
             if($clockorcounter == 1)
             {
@@ -110,7 +109,7 @@ class Captcha
             }
 
             $place = $range*($i+1) + rand(1,$range/2) - rand(1,$range/2);
-            imagettftext($this->img, rand(14,20), $rotangle, $place, 30, $this->colorTxt[$i%2], $font, substr($this->strCheck, $i, 1) );
+            imagettftext($this->img, rand(14,20), $rotangle, $place, 30, $this->colorTxt[$i%2], "arial.ttf", substr($this->strCheck, $i, 1) );
         }
     }
 
