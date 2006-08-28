@@ -51,7 +51,9 @@ class part
             $pagename = PAGE_PREFIX . $path["page"];
 
             if(method_exists($this, $pagename))
-               return $this->$pagename($args);
+                return $this->$pagename($args);
+
+            return $this->pageDefault($args, $path["page"]);
         }
 
        return $this->pageDefault($args);
@@ -63,7 +65,7 @@ class part
         //Should be Overridden
     }
 
-    function pageDefault($arg)
+    function pageDefault($arg, $page = "default")
     {
         die("This should be overridden");
     }
