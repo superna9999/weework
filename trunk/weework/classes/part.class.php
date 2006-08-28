@@ -43,9 +43,12 @@ class part
             if(isset($path["method"]) && $path["method"] === "POST")
             {
                 $pagename = POST_PREFIX . $path["page"];
+                $defpage = POST_PREFIX . "Default";
 
                 if(method_exists($this, $pagename))
                     return $this->$pagename($args);
+                if(method_exists($this, $defpage))
+                    return $this->$defpage($args, $path);
             }
 
             $pagename = PAGE_PREFIX . $path["page"];
@@ -53,7 +56,7 @@ class part
             if(method_exists($this, $pagename))
                 return $this->$pagename($args);
 
-            return $this->pageDefault($args, $path["page"]);
+            return $this->pageDefault($args, $path);
         }
 
        return $this->pageDefault($args);
@@ -65,7 +68,7 @@ class part
         //Should be Overridden
     }
 
-    function pageDefault($arg, $page = "default")
+    function pageDefault($arg, $path = array())
     {
         die("This should be overridden");
     }
