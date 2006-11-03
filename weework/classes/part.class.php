@@ -61,8 +61,8 @@ class part
             return $this->$defpage($args, $path);
         }
 
-       return $this->$defpage($args);
-                   
+       return $this->$defpage($args, $path);
+
     }
 
     function initPart($arg)
