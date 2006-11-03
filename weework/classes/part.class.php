@@ -47,7 +47,8 @@ class part
             {
                 $pagename = POST_PREFIX . $path["page"];
 
-                if(method_exists($this, $pagename))
+                if(method_exists($this, $pagename)
+                   && $pagename!=$defpost)
                     return $this->$pagename($args);
                 if(method_exists($this, $defpost))
                     return $this->$defpost($args, $path);
@@ -55,7 +56,8 @@ class part
 
             $pagename = PAGE_PREFIX . $path["page"];
 
-            if(method_exists($this, $pagename))
+            if(method_exists($this, $pagename)
+               && $pagename!=$defpage)
                 return $this->$pagename($args);
 
             return $this->$defpage($args, $path);
