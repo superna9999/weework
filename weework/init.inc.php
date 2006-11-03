@@ -59,7 +59,7 @@ class wee
 
         }
         else
-            $args["part"] = "index";
+            $args["part"] = DEFAULT_PARTNAME;
 
         /* Request Method */
         $method = $_SERVER["REQUEST_METHOD"];
@@ -70,14 +70,15 @@ class wee
         /* Find Part */
         $classname = PART_PREFIX . $args["part"];
 
-        if(class_exists($classname))
-        {
-            $part = new $classname();
-            $part->initPart($args);
-            $part->lookUp($args);
-        }
-        else
-            die("Class $classname does not exist !");
+        if(!class_exists($classname))
+            $classname = PART_PREFIX . DEFAULT_PARTNAME;
+
+        if(!class_exists($classname))
+            die("Default part ". DEFAULT_PARTNAME ." does not exist !");
+
+        $part = new $classname();
+        $part->initPart($args);
+        $part->lookUp($args);
     }
 }
 

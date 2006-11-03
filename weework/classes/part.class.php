@@ -28,6 +28,8 @@ class part
 
     function lookUp($path)
     {
+        $defpage = POST_PREFIX . DEFAULT_PAGENAME;
+        
         //path should be "page", "params"...
         if(isset($path["args"]))
         {
@@ -43,7 +45,6 @@ class part
             if(isset($path["method"]) && $path["method"] === "POST")
             {
                 $pagename = POST_PREFIX . $path["page"];
-                $defpage = POST_PREFIX . "Default";
 
                 if(method_exists($this, $pagename))
                     return $this->$pagename($args);
@@ -56,10 +57,10 @@ class part
             if(method_exists($this, $pagename))
                 return $this->$pagename($args);
 
-            return $this->pageDefault($args, $path);
+            return $this->$defpage($args, $path);
         }
 
-       return $this->pageDefault($args);
+       return $this->$defpage($args);
                    
     }
 
