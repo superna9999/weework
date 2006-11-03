@@ -49,7 +49,7 @@ class part
 
                 if(method_exists($this, $pagename))
                     return $this->$pagename($args);
-                if(method_exists($this, $defpage))
+                if(method_exists($this, $defpost))
                     return $this->$defpost($args, $path);
             }
 
