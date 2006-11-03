@@ -39,5 +39,11 @@ define("PART_PREFIX", "part_");
 define("PLUGIN_NAME", ".plugin.php");
 define("PLUGIN_INIT", "_plugin_init");
 
+/* Behaviour Defines */
+if(!defined("DEFAULT_PARTNAME"))
+    define("DEFAULT_PARTNAME", "index");
+if(!defined("DEFAULT_PAGENAME"))
+    define("DEFAULT_PAGENAME", "default");
+
 require WEEWORK_PATH . 'includes.inc.php';
 
