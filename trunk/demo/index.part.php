@@ -33,8 +33,8 @@ class part_index extends part
         global $global;
         if(file_exists("text/login.txt"))
             $smarty->assign("text", wiki_parse(file_get_contents("text/login.txt")));
-        $c = new Captcha(4);
-        $c->Generate("temp.png");
+        //$c = new Captcha(4);
+        //$c->Generate("temp.png");
         $smarty->display("login.tpl");
     }
 
