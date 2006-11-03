@@ -27,7 +27,7 @@ class part_index extends part
         unset($global->login);
     }
 
-    function pageDefault($arg)
+    function pageDefault($arg, $path)
     {
         global $smarty;
         global $global;
@@ -35,6 +35,9 @@ class part_index extends part
             $smarty->assign("text", wiki_parse(file_get_contents("text/login.txt")));
         //$c = new Captcha(4);
         //$c->Generate("temp.png");
+        $smarty->assign("page", $path["page"]);
+        $smarty->assign("part", $path["part"]);
+        $smarty->assign("args", $arg);
         $smarty->display("login.tpl");
     }
 
