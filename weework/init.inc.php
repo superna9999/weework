@@ -41,6 +41,10 @@ class wee
         $expl = explode("/", $path);
 
         $args = array();
+        $args["part"] = DEFAULT_PARTNAME;
+        $args["page"] = DEFAULT_PAGENAME;
+        $args["args"] = array();
+
         if(isset($expl[0]) && strlen($expl[0])>0 )
         {
             $args["part"] = $expl[0];
@@ -49,7 +53,6 @@ class wee
             {
                 $args["page"] = $expl[1];
 
-                $args["args"] = array();
                 if(count($expl) > 2)
                 {    
                     for($i = 2 ; $i < count($expl) ; ++$i)
@@ -58,8 +61,6 @@ class wee
             }
 
         }
-        else
-            $args["part"] = DEFAULT_PARTNAME;
 
         /* Request Method */
         $method = $_SERVER["REQUEST_METHOD"];
