@@ -51,7 +51,7 @@ function debug_handler($errno, $errstr, $errfile, $errline, $context, $backtrace
 
 function debug_plugin_init()
 {
-    set_error_handler('debug_handler');
+    set_error_handler('debug_handler', E_ALL);
 }
 
 
