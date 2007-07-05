@@ -22,36 +22,70 @@
 
     Usage:
     $length = 4;
-    $c = new Captcha($length);
-    $code = $c->Generate("tmp/captcha.png");
+    $c = new Captcha($length, "../fonts");
+    $code = $c->GenStr();
+    $c->Generate("tmp/captcha.png");
     $global->captcha = $code;
     echo "<img src=\"tmp/captcha.png\">";
+
+    Changelog : 
+     * It has slight modifications to cover the needs 
+    of generating the code before making the captcha.
+    It also allows to modify the font location.
+
+    Modified by Pavlos Stamboulides under the same license
+    pavlos@psychology.deletethis.gr
+
+    Modified by Andrew Fenn on 27 June 2007 
+    under the GPL 2 or Later license
+    
+    andrewfenn[.at.]gmail[.dot.]com
+
+     * Changed and corrected this code for integration in WeeWork.
 
  */
 
 class Captcha
 {
-    var $strCheck = "";
-    var $strLength = 3;
+    var $strCheck;
+    var $strLength;
     var $img;
+    var $font;
     var $colorBg;
     var $colorTxt = array();
     var $colorLine;
+    var $colorR;
+    var $colorG;
+    var $colorG2;
+    var $colorB;
+    var $colorB2;
+    var $fontDir;
+    var $imgWidth;
+    var $imgHeight;
 
-    function Captcha($length)
+    function Captcha($length, $width = 200, $height = 50, $fontDir = './')
     {
         $this->strLength = $length;
+        $this->fontDir = $fontDir;
+        $this->imgWidth = $width;
+        $this->imgHeight =  $height;
     }
 
     /* Generates the Image to the file and returns the string to verify */
-    function Generate($imgName)
+    function Generate($imgName, $withEllipses = false)
     {
-        $this->GenStr();
-        $this->img = imageCreate(200,50);
+        $this->img = imageCreate($this->imgWidth, $this->imgHeight);
         $this->GenColors();
+        if ($withEllipses)
+        {
+            $this->PutEllipses();
+            $this->PutSimpleLines();
+        }
+        else
+        {
+            $this->PutLines();
+        }
         $this->PutLetters();
-        $this->PutEllipses();
-        $this->PutLines();
         imagePNG($this->img, $imgName);
         return $this->strCheck;
     }
@@ -76,40 +110,52 @@ class Captcha
                 $this->strCheck .= chr(rand(80,90));
             }
         }
+
+        return $this->strCheck;
     }
 
     function GenColors()
     {
-        $colorR = rand(100,230);
-        $colorG = rand(100,230);
-        $colorB = rand(100,230);
+        srand(rand());
 
-        $colorG2 = (rand(100,230)+$colorG)/2;
-        $colorB2 = (rand(100,230)+$colorB)/2;
+        $this->colorR = rand(100,230);
+        $this->colorG = rand(100,230);
+        $this->colorB = rand(100,230);
 
-        $this->colorBg = imageColorAllocate($this->img, $colorR, $colorG, $colorB);
-        $this->colorTxt[0] = imageColorAllocate($this->img, ($colorR - 80), ($colorG2 - 70), ($colorB - 80));
-        $this->colorTxt[1] = imageColorAllocate($this->img, ($colorR - 70), ($colorG - 80), ($colorB2 - 70));
-        $this->colorLine = imageColorAllocate($this->img, ($colorR - 10), ($colorG2 - 20), ($colorB2 - 10));
+        $this->colorG2 = (rand(100,230) + $this->colorG)/2;
+        $this->colorB2 = (rand(100,230) + $this->colorB)/2;
+
+        srand(rand());
+
+        $this->colorBg = imageColorAllocate($this->img, $this->colorR, $this->colorG, $this->colorB);
+        $this->colorTxt[0] = imageColorAllocate($this->img, ($this->colorR - 80), ($this->colorG2 - 70), ($this->colorB - 80));
+        $this->colorTxt[1] = imageColorAllocate($this->img, ($this->colorR - 70), ($this->colorG - 80), ($this->colorB2 - 70));
+        $this->colorLine = imageColorAllocate($this->img, ($this->colorR - rand(5,10)), ($this->colorG2 - rand(5,10)), ($this->colorB2 - rand(5,10)));
     }
 
     function PutLetters()
     {
-        $range = (200/($this->strLength+1));
-        for($i=0 ; $i < $this->strLength ; $i++)
-        {
-            $clockorcounter = rand(1,2);
-            if($clockorcounter == 1)
-            {
-                $rotangle = rand(0,45);
-            }
-            else
-            {
-                $rotangle = rand(315,360);
-            }
+        srand(rand()); 
 
-            $place = $range*($i+1) + rand(1,$range/2) - rand(1,$range/2);
-            imagettftext($this->img, rand(14,20), $rotangle, $place, 30, $this->colorTxt[$i%2], "arial.ttf", substr($this->strCheck, $i, 1) );
+        $place = 0;
+        $range = ($this->imgWidth / ($this->strLength + 1));
+        for($i = 0 ; $i < $this->strLength ; $i++)
+        {
+            $rotangle = rand(-40, 40);
+            $font_size = rand(16, 19);
+
+            do 
+            {
+                $temp_place = $range*($i + 1) + 
+                              rand(1 ,$range / 2) - 
+                              rand(1, $range / 2);
+            } while ($place + ($font_size + 10) > $temp_place);
+
+            $font = $this->fontDir.'/'.rand(1, 4).'.ttf';
+            $place = $temp_place;
+            imagettftext($this->img, $font_size, $rotangle, $place, 30,
+                         $this->colorTxt[$i%2], $font, 
+                         substr($this->strCheck, $i, 1) );
         }
     }
 
@@ -117,20 +163,69 @@ class Captcha
     {
         for($i=0 ; $i<4 ; $i++)
         {
-            imageellipse($this->img,rand(1,200),rand(1,50),rand(50,100),rand(12,25),$this->colorLine);
+            imageellipse($this->img, rand(1,200), rand(1,50), 
+                         rand(50,100), rand(12,25), $this->colorLine);
         }
         for($i=0 ; $i<4 ; $i++)
         {
-            imageellipse($this->img,rand(1,200),rand(1,50),rand(50,100),rand(12,25),$this->colorLine);
+            imageellipse($this->img, rand(1,200), rand(1,50), 
+                         rand(50,100), rand(12,25), $this->colorLine);
+        }
+    }
+
+    function PutSimpleLines()
+    {
+        for($i = 0 ; $i < 8 ; $i++)
+        {
+            imageline($this->img, rand(1,200), rand(1,50),
+                      rand(50,100), rand(12,25), $this->colorLine);
         }
     }
 
     function PutLines()
     {
-        for($i=0 ; $i<8 ; $i++)
+
+        srand(rand());
+
+        $temp_y = 0;
+        $temp_x = 0;
+        for($i = 0 ; $i < 5 ; $i++)
         {
-            imageline($this->img,rand(1,200),rand(1,50),rand(50,100),rand(12,25),$this->colorLine);
+            for ($x = 0; $x < 15; $x++) 
+            {
+                $min_x = $temp_x;
+                $temp_x = rand(-20, 15) + ($x * rand(10,20));
+                $min_y = $temp_y;
+                $temp_y = rand(-15, 10) + ($i * rand(-4,9));
+                $color = imageColorAllocate($this->img, 
+                        ($this->colorR - rand(-15,15)), 
+                        ($this->colorG - rand(-15,15)), 
+                        ($this->colorB - rand(-15,15)));
+
+                $this->drawRoundRectangle($this->img, $min_x , $min_y,
+                       $temp_x, $temp_y, rand(1, 30), $color); 
+            }
         }
     }
+
+    function drawRoundRectangle($img, $x1, $y1, $x2, $y2, $radius, $color)
+    {
+        imagefilledrectangle($img, $x1 + $radius, $y1, 
+                             $x2 - $radius, $y2, $color);
+        imagefilledrectangle($img, $x1, $y1 + $radius, 
+                             $x1 + $radius-1, $y2 - $radius, $color);
+        imagefilledrectangle($img, $x2 - $radius+1, $y1 + $radius,
+                             $x2, $y2-$radius, $color);
+
+        imagefilledarc($img, $x1 + $radius, $y1 + $radius, $radius * 2,
+                       $radius * 2, 180 , 270, $color, IMG_ARC_PIE);
+        imagefilledarc($img, $x2 - $radius, $y1 + $radius, $radius * 2,
+                       $radius * 2, 270 , 360, $color, IMG_ARC_PIE);
+        imagefilledarc($img, $x1 + $radius, $y2 - $radius, $radius * 2,
+                       $radius * 2, 90 , 180, $color, IMG_ARC_PIE);
+        imagefilledarc($img, $x2 - $radius, $y2 - $radius, $radius * 2,
+                       $radius * 2, 360 , 90, $color, IMG_ARC_PIE);
+    }
+
 }
 
