@@ -17,7 +17,7 @@ function smarty_function_captcha($params, &$smarty){
 	
 	$c = new Captcha($length);
 	$code = $c->GenStr();
-    $c->fontdir = realpath ($smarty->template_dir);
+    $c->fontDir = realpath ($smarty->template_dir);
     $salted = md5(strtoupper($code) . $salt . 'salt' . strtoupper($code) . $salt . 'salt');
 	
 	$code = $c->Generate("$tempfolder/$salted.png");
